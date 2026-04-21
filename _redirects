@@ -1,0 +1,15 @@
+# Netlify : URLs sans .html (réécriture 200)
+/contact      /contact.html      200
+/services     /services.html     200
+/realisations /realisations.html 200
+/a-propos     /a-propos.html     200
+
+# Anciennes URLs → version propre (SEO)
+/contact.html      /contact      301
+/services.html     /services     301
+/realisations.html /realisations 301
+/a-propos.html     /a-propos     301
+/index.html        /             301
+
+# Alias « accueil » → racine (une seule URL canonique pour l’accueil)
+/accueil           /             301

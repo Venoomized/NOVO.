@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr-CH">
+  <head>
+    <script>
+      document.documentElement.setAttribute(
+        "data-theme",
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://novodesign.ch/" />
+    <title>Design test — NOVO.</title>
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div
+      style="
+        padding: var(--space-4) var(--space-6);
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: flex-end;
+      "
+    >
+            <span class="theme-switch-wrap">
+        <label class="switch theme-switch" for="theme-toggle">
+          <input
+            type="checkbox"
+            id="theme-toggle"
+            class="theme-toggle-input"
+            aria-label="Basculer entre le mode clair et le mode sombre"
+          />
+          <span class="slider round" aria-hidden="true">
+            <svg class="stars" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 34" fill="none">
+              <path
+                id="star-1"
+                class="star"
+                d="M8 4l1.2 3.5h3.8L10.5 9.8 11.7 13 8 10.9 4.3 13l1.2-3.2-2.5-2.3h3.8L8 4z"
+                fill="#fff"
+              />
+              <path
+                id="star-2"
+                class="star"
+                d="M6 18l.8 2h2.2L7.2 21.2 8 23l-1.8-1.2-1.8 1.2.8-1.8-1.8-1.2h2.2L6 18z"
+                fill="#fff"
+              />
+              <path
+                id="star-3"
+                class="star"
+                d="M14 16l1 2.5h2.7l-2.2 1.6.8 2.7-2.3-1.7-2.3 1.7.8-2.7-2.2-1.6h2.7L14 16z"
+                fill="#fff"
+              />
+              <path
+                id="star-4"
+                class="star"
+                d="M22 3l1.4 4h4.2l-3.4 2.5 1.3 4.1-3.5-2.6-3.5 2.6 1.3-4.1-3.4-2.5h4.2L22 3z"
+                fill="#fff"
+              />
+            </svg>
+            <svg
+              id="cloud-1"
+              class="cloud-light"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 40 20"
+            >
+              <path fill="#eee" d="M8 14h20a8 8 0 1 0-1.2-15.9A10 10 0 0 0 8 14z" />
+            </svg>
+            <svg
+              id="cloud-2"
+              class="cloud-light"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 14"
+            >
+              <path fill="#eee" d="M4 12h14a6 6 0 1 0-.8-11.9A7 7 0 0 0 4 12z" />
+            </svg>
+            <svg
+              id="cloud-3"
+              class="cloud-light"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 16"
+            >
+              <path fill="#eee" d="M6 13h18a7 7 0 1 0-1-13.8A8 8 0 0 0 6 13z" />
+            </svg>
+            <svg
+              id="cloud-4"
+              class="cloud-dark"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 40 20"
+            >
+              <path fill="#ccc" d="M8 14h20a8 8 0 1 0-1.2-15.9A10 10 0 0 0 8 14z" />
+            </svg>
+            <svg
+              id="cloud-5"
+              class="cloud-dark"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 14"
+            >
+              <path fill="#ccc" d="M4 12h14a6 6 0 1 0-.8-11.9A7 7 0 0 0 4 12z" />
+            </svg>
+            <svg
+              id="cloud-6"
+              class="cloud-dark"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 16"
+            >
+              <path fill="#ccc" d="M6 13h18a7 7 0 1 0-1-13.8A8 8 0 0 0 6 13z" />
+            </svg>
+            <span class="sun-moon">
+              <svg id="light-ray-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 43">
+                <circle cx="21.5" cy="21.5" r="20" fill="#fff" opacity="0.1" />
+              </svg>
+              <svg id="light-ray-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
+                <circle cx="27.5" cy="27.5" r="25" fill="#fff" opacity="0.1" />
+              </svg>
+              <svg id="light-ray-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                <circle cx="30" cy="30" r="28" fill="#fff" opacity="0.1" />
+              </svg>
+              <span id="moon-dot-1" class="moon-dot"></span>
+              <span id="moon-dot-2" class="moon-dot"></span>
+              <span id="moon-dot-3" class="moon-dot"></span>
+            </span>
+          </span>
+        </label>
+
+      </span>
+    </div>
+    <main class="section section--loose">
+      <div class="section__inner">
+        <p class="section__label">Tokens &amp; typo</p>
+        <h1 class="display-xl">
+          Cabinet Grotesk — <span class="text-accent">accent</span>
+        </h1>
+        <p class="body-large" style="margin-top: var(--space-8)">
+          Satoshi Regular : corps de texte lisible pour indépendants et PME en
+          Suisse romande. Hiérarchie forte entre titres et paragraphes.
+        </p>
+        <div style="margin-top: var(--space-12); display: flex; flex-wrap: wrap; gap: var(--space-4)">
+          <button type="button" class="btn btn--primary">CTA primaire</button>
+          <button type="button" class="btn btn--secondary">Secondaire</button>
+          <button type="button" class="btn btn--ghost">Ghost</button>
+        </div>
+        <div
+          style="
+            margin-top: var(--space-16);
+            padding: var(--space-8);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+          "
+        >
+          <p style="margin: 0; font-size: 0.875rem">
+            Surface <code>--color-surface</code> · bordure
+            <code>--color-border</code>
+          </p>
+        </div>
+      </div>
+    </main>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

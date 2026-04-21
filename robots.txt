@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Pages techniques / hors production (pas de dossier admin sur ce site statique)
+Disallow: /design-test.html
+Disallow: /components/
+
+Sitemap: https://novodesign.ch/sitemap.xml
