@@ -2694,50 +2694,54 @@ body.has-cookie-banner {
 }
 
 /*
- * Mobile (≤1023px) : 100svh = petit viewport (UI navigateur / barre d’adresse *visible*).
- * Cette hauteur ne varie pas quand l’UI se replie au scroll, donc plus de “saut”.
- * (innerHeight + --vvh-unit en JS ne convient pas ici : dépend d’un instantané variable.)
+ * Mobile (≤1023px) : --vv-h = hauteur de visualViewport/inner en px, figée en JS
+ * (jamais sur resize au scroll) → hauteurs stables, pas de jump quand l’UI du
+ * navigateur se cache. Repli 100svh si la var n’existe pas encore.
  */
 @media (max-width: 1023px) {
-  html {
-    min-height: 100%;
-    min-height: 100svh;
-  }
-
+  html,
   body {
     min-height: 100%;
     min-height: 100svh;
+    min-height: var(--vv-h);
+  }
+
+  main {
+    min-height: calc(100svh - var(--header-h));
+    min-height: calc(var(--vv-h) - var(--header-h));
   }
 
   .page-hero.section--loose,
   .realisations-hero,
   .hero.section--loose,
   .contact-hero {
-    min-height: calc(100vh - var(--header-h));
     min-height: calc(100svh - var(--header-h));
+    min-height: calc(var(--vv-h) - var(--header-h));
     justify-content: center;
   }
 
-  /* Accueil : centrage sur la hauteur “barre visible” (svh) ; grandit si le mock+texte débordent. */
+  /* Accueil : hauteur min. = zone verrouillée, ou contenu s’il est plus haut (mock non coupé). */
   body[data-page="home"] .hero.section--loose {
     min-height: max(
       max-content,
-      calc(100vh - var(--header-h))
+      calc(100svh - var(--header-h))
     );
     min-height: max(
       max-content,
-      calc(100svh - var(--header-h))
+      calc(var(--vv-h) - var(--header-h))
     );
   }
 
   .mobile-drawer {
     min-height: 100%;
     min-height: 100svh;
+    min-height: var(--vv-h);
   }
 }
 
 @media (min-width: 900px) and (max-width: 1023px) {
   .contact-layout__visual {
     min-height: min(20rem, 36svh);
+    min-height: min(20rem, calc(0.36 * var(--vv-h)));
   }
 }

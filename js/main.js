@@ -8,6 +8,56 @@
 
   var html = document.documentElement;
 
+  /**
+   * Mobile : hauteur de zone utile en px (--vv-h), imobile au scroll. Les barres
+   * d’adresse / du bas changent innerHeight + les unités vh/svh = reflow. On
+   * n’enregistre qu’au chargement / retournement bfcache / orientation / passage
+   * mobile↔bureau, jamais sur window.resize.
+   */
+  function applyMobileViewportHeightLock() {
+    var mq = window.matchMedia("(max-width: 1023px)");
+    if (!mq.matches) {
+      html.style.removeProperty("--vv-h");
+      return;
+    }
+    var h;
+    if (window.visualViewport && window.visualViewport.height) {
+      h = window.visualViewport.height;
+    } else {
+      h = window.innerHeight;
+    }
+    if (h > 0) {
+      html.style.setProperty("--vv-h", Math.round(h) + "px");
+    }
+  }
+
+  function initMobileViewportHeightLock() {
+    applyMobileViewportHeightLock();
+    window.addEventListener("load", function () {
+      setTimeout(applyMobileViewportHeightLock, 0);
+    });
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) {
+        setTimeout(applyMobileViewportHeightLock, 0);
+      }
+    });
+    window.addEventListener("orientationchange", function () {
+      setTimeout(applyMobileViewportHeightLock, 300);
+      setTimeout(function () {
+        if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === "function") {
+          window.ScrollTrigger.refresh();
+        }
+      }, 400);
+    });
+    var mq2 = window.matchMedia("(max-width: 1023px)");
+    if (typeof mq2.addEventListener === "function") {
+      mq2.addEventListener("change", applyMobileViewportHeightLock);
+    } else if (typeof mq2.addListener === "function") {
+      mq2.addListener(applyMobileViewportHeightLock);
+    }
+  }
+  initMobileViewportHeightLock();
+
   function getSystemTheme() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
