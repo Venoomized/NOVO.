@@ -810,8 +810,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: calc(var(--space-12) + env(safe-area-inset-top, 0px));
-  padding-bottom: calc(var(--space-24) + env(safe-area-inset-bottom, 0px));
+  padding-top: calc(var(--space-16) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
 }
 
 .hero .hero__grid {
@@ -886,10 +886,10 @@ main {
   opacity: 0.7;
 }
 
-/* Hero */
+/* Hero (accueil) — resserré ici, le bloc .hero.section--loose fixe le padding final */
 .hero {
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-24);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
 }
 
 .hero__grid {
@@ -2715,21 +2715,25 @@ body.has-cookie-banner {
     min-height: calc(100 * var(--vvh-unit) - var(--header-h));
   }
 
-  /* justify-content: center (global) + min-height = la case flex répartit l’espace
-   * haut/bas : toute variation de hauteur du bloc déplace l’espace *sous* le contenu
-   * (illusoirement « entre le hero et la 1ʳᵉ section »). Ici haut = padding existant. */
   .page-hero.section--loose,
   .realisations-hero,
-  .hero.section--loose {
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100 * var(--vvh-unit) - var(--header-h));
-    justify-content: flex-start;
-  }
-
+  .hero.section--loose,
   .contact-hero {
     min-height: calc(100vh - var(--header-h));
     min-height: calc(100 * var(--vvh-unit) - var(--header-h));
-    justify-content: flex-start;
+    justify-content: center;
+  }
+
+  /* Accueil : si texte + mock dépassent un écran, la hauteur suit le contenu (pas de coupure). */
+  body[data-page="home"] .hero.section--loose {
+    min-height: max(
+      max-content,
+      calc(100vh - var(--header-h))
+    );
+    min-height: max(
+      max-content,
+      calc(100 * var(--vvh-unit) - var(--header-h))
+    );
   }
 
   .mobile-drawer {
