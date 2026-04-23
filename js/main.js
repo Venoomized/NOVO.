@@ -8,6 +8,41 @@
 
   var html = document.documentElement;
 
+  /**
+   * Mobile : fige la hauteur “utile” au chargement (innerHeight/100 en px).
+   * Ne pas réagir à window.resize : la barre d’adresse mobile modifie innerHeight et
+   * provoquerait un reflow ; on ne recalibre qu’au changement d’orientation ou au
+   * passage tablette ↔ desktop (matchMedia).
+   */
+  function initMobileViewportHeightLock() {
+    var mq = window.matchMedia("(max-width: 1023px)");
+    function apply() {
+      if (!mq.matches) {
+        html.style.removeProperty("--vvh-unit");
+        return;
+      }
+      var h = window.innerHeight;
+      if (h > 0) {
+        html.style.setProperty("--vvh-unit", h / 100 + "px");
+      }
+    }
+    apply();
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", apply);
+    } else if (typeof mq.addListener === "function") {
+      mq.addListener(apply);
+    }
+    window.addEventListener("orientationchange", function () {
+      setTimeout(apply, 250);
+      setTimeout(function () {
+        if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === "function") {
+          window.ScrollTrigger.refresh();
+        }
+      }, 300);
+    });
+  }
+  initMobileViewportHeightLock();
+
   function getSystemTheme() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
