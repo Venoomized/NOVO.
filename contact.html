@@ -10,6 +10,7 @@
       );
     </script>
     <meta charset="utf-8" />
+    <!-- Google Analytics 4 (G-NDHSPJS7NG) : gtag inséré dans le head par js/main.js uniquement après consentement cookies (aucune requête GA sans acceptation). -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -19,7 +20,7 @@
     <meta name="geo.region" content="CH-VD" />
     <meta name="geo.placename" content="Vaud, Suisse" />
     <meta name="theme-color" content="#a78bfa" />
-    <title>Contact NOVO. Lausanne | devis site web &amp; SEO Vaud</title>
+    <title>Contact &amp; devis | NOVO. — Agence Web Lausanne</title>
     <link rel="canonical" href="https://novodesign.ch/contact" />
     <link rel="alternate" hreflang="fr-CH" href="https://novodesign.ch/contact" />
     <link rel="alternate" hreflang="fr" href="https://novodesign.ch/contact" />
@@ -28,22 +29,22 @@
     <meta property="og:site_name" content="NOVO." />
     <meta property="og:locale" content="fr_CH" />
     <meta property="og:url" content="https://novodesign.ch/contact" />
-    <meta property="og:title" content="Contact NOVO. Lausanne | devis site web &amp; SEO Vaud" />
+    <meta property="og:title" content="Contact &amp; devis | NOVO. — Agence Web Lausanne" />
     <meta
       property="og:description"
       content="Contact agence web Lausanne &amp; Vaud : devis site internet, SEO, maintenance. Réponse sous 24 h, sans pression commerciale."
     />
-    <meta property="og:image" content="./assets/favicon.svg" />
+    <meta property="og:image" content="https://novodesign.ch/assets/og-image.jpg" />
     <meta property="og:image:alt" content="Contacter NOVO. — agence web Lausanne et Vaud" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Contact NOVO. | devis site web Lausanne &amp; Vaud" />
+    <meta name="twitter:title" content="Contact &amp; devis | NOVO. — Agence Web Lausanne" />
     <meta
       name="twitter:description"
       content="Devis création site internet, SEO Lausanne. Formulaire ou email — réponse sous 24 h."
     />
     <meta
       name="twitter:image"
-      content="./assets/favicon.svg"
+      content="https://novodesign.ch/assets/og-image.jpg"
     />
     <script type="application/ld+json">
       {
@@ -83,15 +84,23 @@
             "name": "NOVO.",
             "url": "https://novodesign.ch/",
             "email": "info@novodesign.ch",
+            "description": "Agence web : sites sur-mesure, SEO et maintenance pour PME et indépendants en Suisse romande.",
+            "image": "https://novodesign.ch/assets/og-image.jpg",
             "priceRange": "CHF",
             "address": {
               "@type": "PostalAddress",
+              "postalCode": "1020",
+              "addressLocality": "Renens",
               "addressRegion": "Vaud",
               "addressCountry": "CH"
             },
-            "areaServed": ["Vaud", "Suisse romande"],
+            "areaServed": [
+              { "@type": "AdministrativeArea", "name": "Canton de Vaud" },
+              { "@type": "AdministrativeArea", "name": "Suisse romande" }
+            ],
             "knowsLanguage": ["fr-CH", "fr"],
-            "availableLanguage": ["French"]
+            "availableLanguage": ["French"],
+            "parentOrganization": { "@id": "https://novodesign.ch/#organization" }
           },
           {
             "@type": "WebSite",
@@ -402,7 +411,9 @@
 
               <div class="contact-form__grid contact-form__grid--2">
                 <div class="contact-form__field">
-                  <label for="contact-firstname">Prénom</label>
+                  <label for="contact-firstname"
+                    >Prénom <span class="required-star" aria-hidden="true">*</span></label
+                  >
                   <input
                     id="contact-firstname"
                     name="firstName"
@@ -414,7 +425,9 @@
                   />
                 </div>
                 <div class="contact-form__field">
-                  <label for="contact-lastname">Nom</label>
+                  <label for="contact-lastname"
+                    >Nom <span class="required-star" aria-hidden="true">*</span></label
+                  >
                   <input
                     id="contact-lastname"
                     name="lastName"
@@ -428,7 +441,9 @@
               </div>
 
               <div class="contact-form__field">
-                <label for="contact-email">Email</label>
+                <label for="contact-email"
+                  >Email <span class="required-star" aria-hidden="true">*</span></label
+                >
                 <input
                   id="contact-email"
                   name="email"
@@ -441,24 +456,23 @@
               </div>
 
               <div class="contact-form__field">
-                <label for="contact-phone">
-                  Numéro de téléphone <span class="required-star" aria-hidden="true">*</span>
-                </label>
+                <label for="contact-phone">Numéro de téléphone</label>
                 <input
                   id="contact-phone"
                   name="phone"
                   type="tel"
                   autocomplete="tel"
                   inputmode="tel"
-                  required
-                  minlength="8"
                   maxlength="28"
                   placeholder="+41 79 000 00 00"
                 />
               </div>
 
               <div class="contact-form__field">
-                <label for="contact-activity">Votre activité en une phrase</label>
+                <label for="contact-activity"
+                  >Votre activité en une phrase
+                  <span class="required-star" aria-hidden="true">*</span></label
+                >
                 <input
                   id="contact-activity"
                   name="activity"
@@ -470,9 +484,7 @@
               </div>
 
               <div class="contact-form__field">
-                <label for="contact-message"
-                  >Message <span class="optional-hint">(optionnel)</span></label
-                >
+                <label for="contact-message">Message</label>
                 <textarea
                   id="contact-message"
                   name="message"
@@ -562,7 +574,15 @@
         </ul>
       </div>
       <div class="section__inner footer-bottom">
-        © <span id="year"></span> NOVO. — Suisse romande. Tous droits réservés.
+        <p class="footer-bottom__line">
+          © <span id="year"></span> NOVO. Tous droits réservés — Lausanne, Suisse.
+        </p>
+        <nav class="footer-legal" aria-label="Informations légales">
+          <a href="./mentions-legales.html">Mentions légales</a>
+          <a href="./politique-confidentialite.html">Politique de confidentialité</a>
+          <a href="./politique-cookies.html">Cookies</a>
+          <a href="./cgv.html">CGV</a>
+        </nav>
       </div>
     </footer>
   </body>
