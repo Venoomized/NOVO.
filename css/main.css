@@ -2715,20 +2715,21 @@ body.has-cookie-banner {
     min-height: calc(100 * var(--vvh-unit) - var(--header-h));
   }
 
+  /* justify-content: center (global) + min-height = la case flex répartit l’espace
+   * haut/bas : toute variation de hauteur du bloc déplace l’espace *sous* le contenu
+   * (illusoirement « entre le hero et la 1ʳᵉ section »). Ici haut = padding existant. */
   .page-hero.section--loose,
-  .realisations-hero {
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100 * var(--vvh-unit) - var(--header-h));
-  }
-
+  .realisations-hero,
   .hero.section--loose {
     min-height: calc(100vh - var(--header-h));
     min-height: calc(100 * var(--vvh-unit) - var(--header-h));
+    justify-content: flex-start;
   }
 
   .contact-hero {
     min-height: calc(100vh - var(--header-h));
     min-height: calc(100 * var(--vvh-unit) - var(--header-h));
+    justify-content: flex-start;
   }
 
   .mobile-drawer {
