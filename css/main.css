@@ -56,11 +56,18 @@ html {
   overflow-x: clip;
   max-width: 100%;
   min-height: 100%;
-  min-height: 100vh;
+  /* svh = petit viewport (UI navigateur visible) : stable quand la barre d’adresse se cache / réapparaît — évite les sauts de layout au scroll (mobile). */
   min-height: 100svh;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Scroll instantané sur mobile = comportement natif, moins de friction avec la barre d’adresse. */
+@media (max-width: 767px) {
   html {
     scroll-behavior: auto;
   }
@@ -78,7 +85,6 @@ body {
   overflow-x: clip;
   max-width: 100%;
   min-height: 100%;
-  min-height: 100vh;
   min-height: 100svh;
 }
 
@@ -764,7 +770,7 @@ body.nav-open .site-header {
   }
 }
 
-/* Main : min-hauteur = viewport stable (svh) − header, évite le reflow quand la barre d’adresse mobile change */
+/* Main layout : min hauteur zone sous header (svh stable sur mobile, pas de reflow barre d’adresse). */
 main {
   overflow-x: clip;
   max-width: 100%;
@@ -787,7 +793,7 @@ main {
 }
 
 /*
- * Heros : 100svh (viewport « small ») − header, stable quand l’UI du navigateur s’affiche / se masque.
+ * Heros : hauteur min = petit viewport (svh) moins header — stable quand la chrome mobile change.
  */
 .page-hero.section--loose,
 .realisations-hero {
@@ -810,8 +816,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: calc(var(--space-16) + env(safe-area-inset-top, 0px));
-  padding-bottom: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
+  padding-top: calc(var(--space-12) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--space-24) + env(safe-area-inset-bottom, 0px));
 }
 
 .hero .hero__grid {
@@ -886,10 +892,10 @@ main {
   opacity: 0.7;
 }
 
-/* Hero (accueil) — resserré ici, le bloc .hero.section--loose fixe le padding final */
+/* Hero */
 .hero {
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-16);
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-24);
 }
 
 .hero__grid {
@@ -1015,6 +1021,10 @@ main {
 
 .offer-card--large {
   padding: var(--space-12) var(--space-8);
+}
+
+.offer-card--recommended {
+  position: relative;
 }
 
 .offer-card__name {
@@ -1215,6 +1225,27 @@ main {
 
 .pricing-card--featured {
   padding: var(--space-12) var(--space-8);
+  position: relative;
+}
+
+.pricing-card__badge,
+.offer-card__badge {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-8);
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-readable);
+  background-color: var(--color-surface);
 }
 
 .pricing-card__head {
@@ -1578,7 +1609,7 @@ main {
   opacity: 0.85;
 }
 
-/* Contact : même logique stable (svh) que les autres héros */
+/* Contact : hauteur = zone visible sous le header ; centrage vertical (pas de gros padding + centre = double marge) */
 .contact-hero {
   box-sizing: border-box;
   width: 100%;
@@ -2691,57 +2722,4 @@ body.has-cookie-banner {
 .seo-faq__a strong {
   font-weight: 600;
   color: var(--color-text);
-}
-
-/*
- * Mobile (≤1023px) : --vv-h = hauteur de visualViewport/inner en px, figée en JS
- * (jamais sur resize au scroll) → hauteurs stables, pas de jump quand l’UI du
- * navigateur se cache. Repli 100svh si la var n’existe pas encore.
- */
-@media (max-width: 1023px) {
-  html,
-  body {
-    min-height: 100%;
-    min-height: 100svh;
-    min-height: var(--vv-h);
-  }
-
-  main {
-    min-height: calc(100svh - var(--header-h));
-    min-height: calc(var(--vv-h) - var(--header-h));
-  }
-
-  .page-hero.section--loose,
-  .realisations-hero,
-  .hero.section--loose,
-  .contact-hero {
-    min-height: calc(100svh - var(--header-h));
-    min-height: calc(var(--vv-h) - var(--header-h));
-    justify-content: center;
-  }
-
-  /* Accueil : hauteur min. = zone verrouillée, ou contenu s’il est plus haut (mock non coupé). */
-  body[data-page="home"] .hero.section--loose {
-    min-height: max(
-      max-content,
-      calc(100svh - var(--header-h))
-    );
-    min-height: max(
-      max-content,
-      calc(var(--vv-h) - var(--header-h))
-    );
-  }
-
-  .mobile-drawer {
-    min-height: 100%;
-    min-height: 100svh;
-    min-height: var(--vv-h);
-  }
-}
-
-@media (min-width: 900px) and (max-width: 1023px) {
-  .contact-layout__visual {
-    min-height: min(20rem, 36svh);
-    min-height: min(20rem, calc(0.36 * var(--vv-h)));
-  }
 }

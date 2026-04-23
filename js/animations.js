@@ -135,6 +135,11 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
+    /* Évite les refresh ScrollTrigger à chaque « resize » (barre d’adresse mobile) — supprime les sauts / recalculs au scroll. */
+    if (typeof ScrollTrigger.config === "function") {
+      ScrollTrigger.config({ ignoreMobileResize: true });
+    }
+
     initFadeUps();
 
     var page = document.body && document.body.getAttribute("data-page");
