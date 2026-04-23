@@ -2694,25 +2694,19 @@ body.has-cookie-banner {
 }
 
 /*
- * Mobile (≤1023px) : hauteurs basées sur --vvh-unit (1 % de innerHeight figé en JS).
- * Évite tout reflow quand la barre du navigateur se cache / réapparaît (svh/dvh/vh seuls
- * restent souvent dynamiques sur Chrome / Safari).
- * Fallback : première ligne valide si --vvh-unit pas encore défini.
+ * Mobile (≤1023px) : 100svh = petit viewport (UI navigateur / barre d’adresse *visible*).
+ * Cette hauteur ne varie pas quand l’UI se replie au scroll, donc plus de “saut”.
+ * (innerHeight + --vvh-unit en JS ne convient pas ici : dépend d’un instantané variable.)
  */
 @media (max-width: 1023px) {
   html {
     min-height: 100%;
-    min-height: calc(100 * var(--vvh-unit));
+    min-height: 100svh;
   }
 
   body {
     min-height: 100%;
-    min-height: calc(100 * var(--vvh-unit));
-  }
-
-  main {
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100 * var(--vvh-unit) - var(--header-h));
+    min-height: 100svh;
   }
 
   .page-hero.section--loose,
@@ -2720,11 +2714,11 @@ body.has-cookie-banner {
   .hero.section--loose,
   .contact-hero {
     min-height: calc(100vh - var(--header-h));
-    min-height: calc(100 * var(--vvh-unit) - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
     justify-content: center;
   }
 
-  /* Accueil : si texte + mock dépassent un écran, la hauteur suit le contenu (pas de coupure). */
+  /* Accueil : centrage sur la hauteur “barre visible” (svh) ; grandit si le mock+texte débordent. */
   body[data-page="home"] .hero.section--loose {
     min-height: max(
       max-content,
@@ -2732,19 +2726,18 @@ body.has-cookie-banner {
     );
     min-height: max(
       max-content,
-      calc(100 * var(--vvh-unit) - var(--header-h))
+      calc(100svh - var(--header-h))
     );
   }
 
   .mobile-drawer {
     min-height: 100%;
-    min-height: calc(100 * var(--vvh-unit));
+    min-height: 100svh;
   }
 }
 
-/* Tablette étroite : panneau contact (évite 36svh dynamique) */
 @media (min-width: 900px) and (max-width: 1023px) {
   .contact-layout__visual {
-    min-height: min(20rem, calc(36 * var(--vvh-unit)));
+    min-height: min(20rem, 36svh);
   }
 }
